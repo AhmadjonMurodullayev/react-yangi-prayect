@@ -12,6 +12,16 @@ const admin = [
         path: "/admin-layout/student",
         icon: <AccessibilityRoundedIcon/>
     },
+    {
+        content: "Course",
+        path: "/admin-layout/course",
+        icon: <AccessibilityRoundedIcon/>
+    },
+    {
+        content: "Group",
+        path: "/admin-layout/group",
+        icon: <AccessibilityRoundedIcon/>
+    },
 ]
 const student = [
     {}

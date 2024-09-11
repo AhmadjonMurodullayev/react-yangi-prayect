@@ -1,0 +1,51 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "Juliet",
+      "age": 18,
+      "phone": "+998932222647",
+      "guruh": "React js Bootcamp N11",
+      "teacher": "Akmal",
+      "address": "Toshkent"
+    }
+  ],
+  "teacher": [
+    {
+      "id": "584",
+      "name": "Alisher",
+      "course": "React "
+    },
+    {
+      "id": "b226",
+      "name": "Alisher",
+      "course": "Standart N3"
+    },
+    {
+      "id": "e33e",
+      "name": "Alisher",
+      "course": "Standart N3"
+    }
+  ],
+  "group": [
+    {
+      "id": "589",
+      "name": "Standart N3",
+      "course": "Bacent"
+    }
+  ],
+  "course": [
+    {
+      "id": "589",
+      "name": "Standart N3",
+      "duration": "8 oy",
+      "price": "100"
+    },
+    {
+      "id": "8082",
+      "name": "Alisher",
+      "duration": "646",
+      "price": "[80808-"
+    }
+  ]
+}

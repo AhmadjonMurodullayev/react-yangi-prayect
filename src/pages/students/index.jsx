@@ -1,71 +1,274 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
-import { styled } from '@mui/material/styles';
+{/* <div>
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import GlobalModal from "../../components/modal";
 
-const StyledGridOverlay = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100%',
-  '& .no-rows-primary': {
-    fill: '#3D4751',
-    ...theme.applyStyles('light', {
-      fill: '#AEB8C2',
-    }),
-  },
-  '& .no-rows-secondary': {
-    fill: '#1D2126',
-    ...theme.applyStyles('light', {
-      fill: '#E8EAED',
-    }),
-  },
-}));
+// function Index() {
+//   const [open, setOpen] = useState(false);
+//   const [form, setForm] = useState({ name: '', year: '', number: '', gruxlar: '' });
+//   const [cars, setCars] = useState([]);
 
-function CustomNoRowsOverlay() {
+//   useEffect(() => {
+//     axios.get('https://special-for-react-data.vercel.app/api/cars')
+//       .then(res => {
+//         setCars(res.data);
+//       })
+//       .catch(error => {
+//         console.error("Error fetching car data:", error);
+//         alert('Failed to fetch car data. Please try again later.');
+//       });
+//   }, []);
+
+//   const editModal = (item) => {
+//     setForm(item);
+//     setOpen(true);
+//   };
+
+//   const toggle = () => {
+//     setOpen(false);
+//     setForm({ name: '', year: '', number: '', gruxlar: '' });
+//   };
+
+//   const handleSubmit = () => {
+//     if (!form.name || !form.year || !form.number || !form.gruxlar) {
+//       alert('Please fill out all fields.');
+//       return;
+//     }
+
+//     if (form.id) {
+//       // Update existing car
+//       axios.put(`https://special-for-react-data.vercel.app/api/cars/${form.id}`, form)
+//         .then(res => {
+//           setCars(cars.map(car => (car.id === form.id ? res.data : car)));
+//           toggle();
+//         })
+//         .catch(error => {
+//           console.error("Error updating car:", error);
+//           alert('Failed to update car. Please try again.');
+//         });
+//     } else {
+//       // Create new car
+//       axios.post('https://special-for-react-data.vercel.app/api/cars', form)
+//         .then(res => {
+//           setCars([...cars, res.data]);
+//           toggle();
+//         })
+//         .catch(error => {
+//           console.error("Error creating car:", error);
+//           alert('Failed to create car. Please try again.');
+//         });
+//     }
+//   };
+
+//   const deleteCar = (id) => {
+//     axios.delete(`https://special-for-react-data.vercel.app/api/cars/${id}`)
+//       .then(() => {
+//         setCars(cars.filter(car => car.id !== id));
+//       })
+//       .catch(error => {
+//         console.error("Error deleting car:", error);
+//         alert('Failed to delete car. Please try again.');
+//       });
+//   };
+
+//   return (
+//     <div className="container">
+//       <GlobalModal
+//         open={open}
+//         toggle={toggle}
+//         form={form}
+//         setForm={setForm}
+//         handleSubmit={handleSubmit}
+//         deleteCar={deleteCar}
+//       />
+//       <div className="row">
+//         <div className="col-md-3 my-4">
+//           <button className="btn btn-primary" onClick={() => { setForm({ name: '', year: '', number: '', gruxlar: '' }); setOpen(true); }}>Add Car</button>
+//         </div>
+//       </div>
+//       <div className="row">
+//         <div className="col-md-8">
+//           <table className="table table-bordered">
+//             <thead>
+//               <tr>
+//                 <th>#</th>
+//                 <th>Name</th>
+//                 <th>Year</th>
+//                 <th>Number</th>
+//                 <th>Gruxlar</th>
+//                 <th>Actions</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {cars.map((item, index) => (
+//                 <tr key={item.id}>
+//                   <td>{index + 1}</td>
+//                   <td>{item.name}</td>
+//                   <td>{item.year}</td>
+//                   <td>{item.number}</td>
+//                   <td>{item.gruxlar}</td>
+//                   <td>
+//                     <button className="btn btn-info" onClick={() => editModal(item)}>
+//                       Edit
+//                     </button>
+//                     <button className="btn btn-danger ms-2" onClick={() => deleteCar(item.id)}>
+//                       Delete
+//                     </button>
+//                   </td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Index;
+</div> */}
+
+import React, { useState, useEffect } from 'react';
+import { Button, Modal, Form } from 'react-bootstrap';
+import axios from 'axios';
+
+function CrudPage() {
+  const [items, setItems] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [currentItem, setCurrentItem] = useState(null);
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  const fetchItems = async () => {
+    const response = await axios.get('https://special-for-react-data.vercel.app/api/users');
+    setItems(response.data);
+  };
+
+  const handleDelete = async (id) => {
+    await axios.delete(`https://special-for-react-data.vercel.app/api/users/${id}`);
+    fetchItems();
+  };
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = (item) => {
+    setCurrentItem(item);
+    setShowModal(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (currentItem && currentItem.id) {
+      await axios.put(`https://special-for-react-data.vercel.app/api/users/${currentItem.id}`, currentItem);
+    } else {
+      await axios.post('https://special-for-react-data.vercel.app/api/users', currentItem);
+    }
+    fetchItems();
+    handleClose();
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentItem({ ...currentItem, [name]: value });
+  };
+
   return (
-    <StyledGridOverlay>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        width={96}
-        viewBox="0 0 452 257"
-        aria-hidden
-        focusable="false"
-      >
-        <path
-          className="no-rows-primary"
-          d="M348 69c-46.392 0-84 37.608-84 84s37.608 84 84 84 84-37.608 84-84-37.608-84-84-84Zm-104 84c0-57.438 46.562-104 104-104s104 46.562 104 104-46.562 104-104 104-104-46.562-104-104Z"
-        />
-        <path
-          className="no-rows-primary"
-          d="M308.929 113.929c3.905-3.905 10.237-3.905 14.142 0l63.64 63.64c3.905 3.905 3.905 10.236 0 14.142-3.906 3.905-10.237 3.905-14.142 0l-63.64-63.64c-3.905-3.905-3.905-10.237 0-14.142Z"
-        />
-        <path
-          className="no-rows-primary"
-          d="M308.929 191.711c-3.905-3.906-3.905-10.237 0-14.142l63.64-63.64c3.905-3.905 10.236-3.905 14.142 0 3.905 3.905 3.905 10.237 0 14.142l-63.64 63.64c-3.905 3.905-10.237 3.905-14.142 0Z"
-        />
-        <path
-          className="no-rows-secondary"
-          d="M0 10C0 4.477 4.477 0 10 0h380c5.523 0 10 4.477 10 10s-4.477 10-10 10H10C4.477 20 0 15.523 0 10ZM0 59c0-5.523 4.477-10 10-10h231c5.523 0 10 4.477 10 10s-4.477 10-10 10H10C4.477 69 0 64.523 0 59ZM0 106c0-5.523 4.477-10 10-10h203c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 153c0-5.523 4.477-10 10-10h195.5c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 200c0-5.523 4.477-10 10-10h203c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10ZM0 247c0-5.523 4.477-10 10-10h231c5.523 0 10 4.477 10 10s-4.477 10-10 10H10c-5.523 0-10-4.477-10-10Z"
-        />
-      </svg>
-      <Box sx={{ mt: 2 }}>No rows</Box>
-    </StyledGridOverlay>
+    <div className="container">
+      <h1 className="my-4">Items List</h1>
+      <Button variant="primary" onClick={() => handleShow(null)}>
+        Add New Item
+      </Button>
+      <table className="table mt-4">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Number</th>
+            <th>Gruxlarim</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map(item => (
+            <tr key={item.id}>
+              <td>{item.name}</td>
+              <td>{item.year}</td>
+              <td>{item.number}</td>
+              <td>{item.gruxlarim}</td>
+              <td>
+                <Button variant="warning" size="sm" onClick={() => handleShow(item)} className="me-2">
+                  Edit
+                </Button>
+                <Button variant="danger" size="sm" onClick={() => handleDelete(item.id)}>
+                  Delete
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Item Modal */}
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{currentItem && currentItem.id ? 'Edit Item' : 'Add Item'}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={currentItem ? currentItem.name : ''}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formYear">
+              <Form.Label>Year</Form.Label>
+              <Form.Control
+                type="number"
+                name="year"
+                value={currentItem ? currentItem.year : ''}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formNumber">
+              <Form.Label>Number</Form.Label>
+              <Form.Control
+                type="tel"
+                name="number"
+                value={currentItem ? currentItem.number : ''}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formGruxlarim">
+              <Form.Label>Gruxlarim</Form.Label>
+              <Form.Control
+                type="text"
+                name="gruxlarim"
+                value={currentItem ? currentItem.gruxlarim : ''}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit" className="mt-3">
+              {currentItem && currentItem.id ? 'Update Item' : 'Add Item'}
+            </Button>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 }
 
-export default function AutoHeightOverlayNoSnap() {
-  return (
-    <Box sx={{ width: '100%' }}>
-      <DataGrid
-        autoHeight
-        columns={[{ field: 'ID' }, { field: 'First name' }, { field: 'Last name' }]}
-        rows={[]}
-        slots={{ noRowsOverlay: CustomNoRowsOverlay }}
-        sx={{ '--DataGrid-overlayHeight': '300px' }}
-      />
-    </Box>
-  );
-}
+export default CrudPage;
