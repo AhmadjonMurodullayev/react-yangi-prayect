@@ -12,19 +12,19 @@
   ],
   "teacher": [
     {
-      "id": "584",
       "name": "Alisher",
-      "course": "React "
+      "course": "8082",
+      "id": "b226"
     },
     {
-      "id": "b226",
       "name": "Alisher",
-      "course": "Standart N3"
+      "course": "589",
+      "id": "e33e"
     },
     {
-      "id": "e33e",
-      "name": "Alisher",
-      "course": "Standart N3"
+      "name": "Alishera\\",
+      "course": "8082",
+      "id": "8525"
     }
   ],
   "group": [
@@ -42,10 +42,10 @@
       "price": "100"
     },
     {
-      "id": "8082",
+      "id": "1585",
       "name": "Alisher",
-      "duration": "646",
-      "price": "[80808-"
+      "duration": "5",
+      "price": "9000"
     }
   ]
 }
