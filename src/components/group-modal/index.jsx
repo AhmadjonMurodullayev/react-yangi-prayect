@@ -29,7 +29,7 @@ export default function KeepMountedModal() {
 
   const handleClose = () => {
     setOpen(false);
-    setForm({ name: '', course: '' });
+    setForm({ name: '', duration: '', price: '' });
   };
 
   const handleChange = (event) => {
@@ -40,12 +40,11 @@ export default function KeepMountedModal() {
   const handleSubmit = async () => {
     try {
       await axios.post("http://localhost:3000/group", form);
-      handleClose(); 
+      handleClose();
     } catch (err) {
-      console.error('Error submitting form:', err);
+      console.error(err);
     }
   };
-
   return (
     <div>
       <Button variant="contained" color="primary" onClick={handleOpen}>

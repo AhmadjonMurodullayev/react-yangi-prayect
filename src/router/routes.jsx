@@ -1,6 +1,7 @@
 import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
 import AccessibilityRoundedIcon from '@mui/icons-material/AccessibilityRounded';
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 const admin = [
     {
         content: "Teacher",
@@ -15,12 +16,12 @@ const admin = [
     {
         content: "Course",
         path: "/admin-layout/course",
-        icon: <AccessibilityRoundedIcon/>
+        icon: <AccountCircleIcon/>
     },
     {
         content: "Group",
         path: "/admin-layout/group",
-        icon: <AccessibilityRoundedIcon/>
+        icon: <AssignmentIndIcon/>
     },
 ]
 const student = [

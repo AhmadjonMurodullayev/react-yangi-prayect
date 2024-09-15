@@ -12,19 +12,14 @@
   ],
   "teacher": [
     {
-      "name": "Alisher",
-      "course": "8082",
+      "name": "Alisherdtfgyhuijkl;fghjkl",
+      "course": "589",
       "id": "b226"
     },
     {
       "name": "Alisher",
       "course": "589",
       "id": "e33e"
-    },
-    {
-      "name": "Alishera\\",
-      "course": "8082",
-      "id": "8525"
     }
   ],
   "group": [
@@ -32,6 +27,13 @@
       "id": "589",
       "name": "Standart N3",
       "course": "Bacent"
+    },
+    {
+      "id": "d7cd",
+      "name": "Alisher",
+      "duration": "",
+      "price": "",
+      "course": "Standart N3"
     }
   ],
   "course": [
@@ -46,6 +48,12 @@
       "name": "Alisher",
       "duration": "5",
       "price": "9000"
+    },
+    {
+      "id": "08b4",
+      "name": "Alisher",
+      "duration": "200",
+      "price": "90000"
     }
   ]
 }
